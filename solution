@@ -1,0 +1,54 @@
+
+public class Solution {
+
+	public static boolean ratInAMaze(int maze[][]){
+
+		/*Your class should be named Solution. 
+		*Don't write main().
+	 	*Don't take input, it is passed as function argument.
+	 	*Don't print output.
+	 	*Taking input and printing output is handled automatically.
+		*/ 
+        
+        int n=maze.length;
+        int path[][]=new int [n][n];
+        return solve(maze,0,0,path);
+
+	}
+    
+    public static boolean solve(int maze[][],int i,int j,int path[][]){
+        int n=maze.length;
+        //CHECK I,J VALID OR NOT
+        if(i<0||i>=n||j<0||j>=n||maze[i][j]==0||path[i][j]==1){
+            return false;
+        }
+        //	CURRENT PATH
+        path[i][j]=1;
+        //DESTINATION CELL
+        if(i==n-1&&j==n-1){
+            return true;
+        }
+        
+        //FURTURE PATH
+        //TOP
+        if(solve(maze,i-1,j,path)){
+            return true;
+        }
+        //RIGHT
+         if(solve(maze,i,j+1,path)){
+            return true;
+        }	
+        	//LEFT
+         if(solve(maze,i,j-1,path)){
+            return true;
+        }
+        //DOWM
+         if(solve(maze,i+1,j,path)){
+            return true;
+        }
+        return false;
+        
+        
+    }
+    
+}
